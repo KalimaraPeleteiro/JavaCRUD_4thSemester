@@ -1,0 +1,1 @@
+-- Script que deve ser rodado para criar as tabelas.
