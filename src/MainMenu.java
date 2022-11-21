@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+
 public class MainMenu implements ActionListener{
 
     JButton FirstOption = new JButton();
@@ -19,7 +20,7 @@ public class MainMenu implements ActionListener{
         window.setTitle("Menu Principal");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        window.setSize(640, 640);
+        window.setSize(640, 480);
         window.setVisible(true);
         window.setLayout(new GridLayout(3, 1, 25, 25));
 
@@ -35,24 +36,26 @@ public class MainMenu implements ActionListener{
         FirstOption.setFont(new Font("Montserrat", Font.PLAIN, 12));
         FirstOption.setForeground(Color.black);
         FirstOption.setBackground(Color.lightGray);
+        FirstOption.addActionListener(this);
         window.add(FirstOption);
 
         SecondOption.setText("Busca de Projetos");
         SecondOption.setFont(new Font("Montserrat", Font.PLAIN, 12));
         SecondOption.setForeground(Color.black);
         SecondOption.setBackground(Color.lightGray);
+        SecondOption.addActionListener(this);
         window.add(SecondOption);
 
     }
 
     @Override
-    public void actionPerformed(ActionEvent event){
-        if(event.getSource() == FirstOption) {
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource()==FirstOption) {
             window.dispose();
             CreatePage newWindow = new CreatePage();
         }
 
-        if(event.getSource() == SecondOption) {
+        if(e.getSource()==SecondOption) {
             window.dispose();
             SearchPage newWindow = new SearchPage();
         }
