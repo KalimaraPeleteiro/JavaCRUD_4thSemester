@@ -32,6 +32,7 @@ public class CreatePage {
         title.setBounds(200, 10, 600, 40);
         window.add(title);
 
+
         // Informações do Projeto
         JLabel infoTitle = new JLabel();
         infoTitle.setText("Título do Projeto");
@@ -62,6 +63,7 @@ public class CreatePage {
         infoDescription.setBounds(50, 500, 150, 25);
         infoDescription.setFont(standardFont);
         window.add(infoDescription);
+
 
         // Inputs
         JTextField titleInput = new JTextField();
@@ -99,6 +101,7 @@ public class CreatePage {
         DescriptionInput.setBounds(200, 500, 400, 100);
         window.add(DescriptionInput);
 
+        
         // Botão de Criação
         createButton.setText("CRIAR");
         createButton.setFont(standardFont);
