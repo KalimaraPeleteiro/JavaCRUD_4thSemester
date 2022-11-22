@@ -13,10 +13,62 @@ public class Database {
     private final static String user = "kalimara";
     private final static String password = "hitman";
 
+    private final static String PROJECT_ID_QUERY = "select id from projetos where titulo_projeto = ?";
+    private final static String ALL_PROJECTS_QUERY = "select titulo_projeto from projetos";
     private final static String SEARCH_PROJECT_QUERY = "select id, titulo_projeto, cidade, estado, categoria, descricao from projetos where titulo_projeto = ?";
     private final static String DELETE_PROJECT_QUERY = "delete from projetos where id = ?";
     private final static String UPDATE_PROJECT_QUERY = "update projetos set titulo_projeto = ?, cidade = ?, estado = ?, categoria = ?, descricao = ? where id = ?";
     private final static String CREATE_PROJECT_QUERY = "insert into projetos values(?, ?, ?, ?, ?, ?)";
+    private final static String CREATE_NEW_PERSON_QUERY = "insert into participantes_projeto values (?, ?, ?, ?, ?)";
+    
+    
+    public int ReturnProjectId(String title) {
+    	
+    	try(Connection connection = DriverManager.getConnection(url, user, password)){
+
+            PreparedStatement query = connection.prepareStatement(PROJECT_ID_QUERY);
+            query.setString(1, title);
+            
+            ResultSet result = query.executeQuery();
+
+
+            while(result.next()) {
+            	return result.getInt("id");
+            }
+            
+            
+        } catch (SQLException error) {
+            printSQLException(error);
+        }
+    
+    	return 0;
+    	
+    }
+    
+    
+    public void CreateNewTeamMember(String name, String email, String telephone, int ProjectID) {
+    	try(Connection connection = DriverManager.getConnection(url, user, password)){
+
+            PreparedStatement query = connection.prepareStatement(CREATE_NEW_PERSON_QUERY);
+            
+            Random generator = new Random();
+    		int id = generator.nextInt(1000000000);
+    		
+            query.setInt(1, id);
+            query.setString(2, name);
+            query.setString(3, email);
+            query.setString(4, telephone);
+            query.setInt(5, ProjectID);
+            
+            query.executeUpdate();
+            
+            
+        } catch (SQLException error) {
+            printSQLException(error);
+        }
+    
+    }
+    
     
     public void SearchProject(String title){
 
@@ -93,6 +145,30 @@ public class Database {
     	} catch (SQLException error) {
             printSQLException(error);
         }
+    }
+    
+    public String[] ReturnAllProjects() {
+		String[] allProjects = new String[10];
+
+    	try (Connection connection = DriverManager.getConnection(url, user, password)){
+    		PreparedStatement query = connection.prepareStatement(ALL_PROJECTS_QUERY);
+    		
+    		ResultSet result = query.executeQuery();
+    		
+    		int counter = 0;
+    		
+    		while (result.next()) {
+            	allProjects[counter] = result.getString("titulo_projeto");
+            	counter = counter + 1;
+            }
+    		
+            
+    	} catch (SQLException error) {
+            printSQLException(error);
+        }
+    	
+		return allProjects;
+
     }
 
 

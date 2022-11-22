@@ -1,17 +1,19 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 
 public class MainMenu implements ActionListener{
 
     JButton FirstOption = new JButton();
     JButton SecondOption = new JButton();
+    JButton ThirdOption = new JButton();
     JFrame window = new JFrame();
 
     MainMenu() {
@@ -22,7 +24,7 @@ public class MainMenu implements ActionListener{
         window.setResizable(false);
         window.setSize(640, 480);
         window.setVisible(true);
-        window.setLayout(new GridLayout(3, 1, 25, 25));
+        window.setLayout(new GridLayout(4, 1, 25, 25));
 
         // Título
         JLabel title = new JLabel();
@@ -45,7 +47,13 @@ public class MainMenu implements ActionListener{
         SecondOption.setBackground(Color.lightGray);
         SecondOption.addActionListener(this);
         window.add(SecondOption);
-
+        
+        ThirdOption.setText("Gerenciamento de Equipes");
+        ThirdOption.setFont(new Font("Montserrat", Font.PLAIN, 12));
+        ThirdOption.setForeground(Color.black);
+        ThirdOption.setBackground(Color.lightGray);
+        ThirdOption.addActionListener(this);
+        window.add(ThirdOption);
     }
 
     @Override
@@ -58,6 +66,11 @@ public class MainMenu implements ActionListener{
         if(e.getSource()==SecondOption) {
             window.dispose();
             SearchPage newWindow = new SearchPage();
+        }
+        
+        if(e.getSource()==ThirdOption) {
+            window.dispose();
+            TeamPage newWindow = new TeamPage();
         }
     }
 

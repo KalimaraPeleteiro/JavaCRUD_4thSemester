@@ -11,7 +11,7 @@ CREATE TABLE projetos(
 );
 
 CREATE TABLE participantes_projeto(
-    cpf varchar(11),
+    id integer,
     nome varchar(100),
     email varchar(100),
     telefone varchar(11),
