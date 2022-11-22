@@ -83,7 +83,7 @@ public class CreatePage {
         JTextField StateInput = new JTextField();
         StateInput.setPreferredSize(standardDimension);
         StateInput.setFont(standardFont);
-        StateInput.setText("Bahia");
+        StateInput.setText("BA");
         StateInput.setBounds(200, 300, 400, 25);
         window.add(StateInput);
 
