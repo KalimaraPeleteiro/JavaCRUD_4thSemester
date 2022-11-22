@@ -8,7 +8,7 @@ CREATE TABLE projetos(
     descricao varchar(1000),
 
     primary key(id)
-)
+);
 
 CREATE TABLE participantes_projeto(
     cpf varchar(11),

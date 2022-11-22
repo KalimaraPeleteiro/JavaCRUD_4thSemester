@@ -1,20 +1,19 @@
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
 
-
-public class SearchPage {
+public class SearchPage implements ActionListener{
 
     JFrame window = new JFrame();
     JButton searchButton = new JButton();
+    JTextField titleInput = new JTextField();
     Font standardFont = new Font ("Montserrat", Font.PLAIN, 14);
     Dimension standardDimension = new Dimension(250, 40);
 
@@ -38,7 +37,6 @@ public class SearchPage {
 
 
         // Campo de Busca
-        JTextField titleInput = new JTextField();
         titleInput.setPreferredSize(standardDimension);
         titleInput.setFont(standardFont);
         titleInput.setText("Título do Projeto");
@@ -50,11 +48,22 @@ public class SearchPage {
         searchButton.setText("BUSCAR");
         searchButton.setFont(standardFont);
         searchButton.setBounds(150, 150, 100, 50);
+        searchButton.addActionListener(this);
         window.add(searchButton);
 
 
          window.setVisible(true);
         
+    }
+
+    @Override
+    public void actionPerformed (ActionEvent e){
+        if (e.getSource()==searchButton){
+            String title = titleInput.getText();
+            Database db = new Database();
+
+            db.SearchProject(title);
+        }
     }
     
 }

@@ -8,10 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class CreatePage implements ActionListener{
+public class UpdatePage implements ActionListener {
     
     JFrame window = new JFrame();
-    JButton createButton = new JButton();
+    JButton updateButton = new JButton();
     JTextField titleInput = new JTextField();
     JTextField CityInput = new JTextField();
     JTextField StateInput = new JTextField();
@@ -19,9 +19,12 @@ public class CreatePage implements ActionListener{
     JTextField DescriptionInput = new JTextField();
     Font standardFont = new Font ("Montserrat", Font.PLAIN, 14);
     Dimension standardDimension = new Dimension(250, 40);
+    int projectID;
 
 
-    CreatePage(){
+    UpdatePage(int id){
+    	
+    	projectID = id;
 
         // Configurando a Tela Principal
         window.setTitle("Criação de Projeto");
@@ -33,7 +36,7 @@ public class CreatePage implements ActionListener{
 
         // Título
         JLabel title = new JLabel();
-        title.setText("Crie seu Projeto");
+        title.setText("Atualize o Projeto");
         title.setFont(new Font("Montserrat", Font.ITALIC, 30));
         title.setBounds(200, 10, 600, 40);
         window.add(title);
@@ -74,48 +77,43 @@ public class CreatePage implements ActionListener{
         // Inputs
         titleInput.setPreferredSize(standardDimension);
         titleInput.setFont(standardFont);
-        titleInput.setText("Meu Projeto");
         titleInput.setBounds(200, 100, 400, 25);
         window.add(titleInput);
 
         CityInput.setPreferredSize(standardDimension);
         CityInput.setFont(standardFont);
-        CityInput.setText("Salvador");
         CityInput.setBounds(200, 200, 400, 25);
         window.add(CityInput);
 
         StateInput.setPreferredSize(standardDimension);
         StateInput.setFont(standardFont);
-        StateInput.setText("BA");
         StateInput.setBounds(200, 300, 400, 25);
         window.add(StateInput);
 
         CategoryInput.setPreferredSize(standardDimension);
         CategoryInput.setFont(standardFont);
-        CategoryInput.setText("Tecnologia");
         CategoryInput.setBounds(200, 400, 400, 25);
         window.add(CategoryInput);
 
         DescriptionInput.setPreferredSize(standardDimension);
         DescriptionInput.setFont(standardFont);
-        DescriptionInput.setText("Tecnologia");
         DescriptionInput.setBounds(200, 500, 400, 100);
         window.add(DescriptionInput);
 
         
         // Botão de Criação
-        createButton.setText("CRIAR");
-        createButton.setFont(standardFont);
-        createButton.setBounds(320, 625, 100, 50);
-        createButton.addActionListener(this);
-        window.add(createButton);
+        updateButton.setText("ENVIAR");
+        updateButton.setFont(standardFont);
+        updateButton.setBounds(320, 625, 100, 50);
+        updateButton.addActionListener(this);
+        window.add(updateButton);
 
         window.setVisible(true);
     }
     
     @Override
     public void actionPerformed (ActionEvent e){
-        if (e.getSource()==createButton){
+        if (e.getSource()==updateButton){
             String infoTitle = titleInput.getText();
             String infoCity = CityInput.getText();
             String infoState = StateInput.getText();
@@ -124,7 +122,7 @@ public class CreatePage implements ActionListener{
 
             Database db = new Database();
 
-            db.CreateProject(infoTitle, infoCity, infoState, infoCategory, infoDescription);
+            db.UpdateProject(infoTitle, infoCity, infoState, infoCategory, infoDescription, projectID);
             
             window.dispose();
         }
